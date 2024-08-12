@@ -32,9 +32,9 @@ int cycleColorsCmd(String command);
 // CONSTANTS
 const int WINDOW_SIZE = 10; // Number of readings to include in the moving average
 
-const int PIN_RED = A3;
-const int PIN_GREEN = A2;
-const int PIN_BLUE = A1;
+const int PIN_RED = A2;
+const int PIN_GREEN = A1;
+const int PIN_BLUE = A0;
 
 // Create an instance of the MAX30205 class
 MAX30205 tempSensor;
