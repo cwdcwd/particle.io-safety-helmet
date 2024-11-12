@@ -124,6 +124,11 @@ void loop()
     if (abs(currentTemperature - movingAverage) >= spikeThreshold)
     {
       Serial.println("Spike Detected!");
+      String msg = String::format(
+          "{\"deviceId\":\"%s\",\"status\":\"temp_spike\",\"currentTemperature\": %f,\"movingAverage\": %f, \"spikeThreshold\": %f}",
+           System.deviceID().c_str(), currentTemperature, movingAverage, spikeThreshold);
+
+      Particle.publish("spike", msg);
 
       for(byte b = 0; b<3; ++b) { //CWD-- flash the LED 3 times
         setColor(true, false, true);
@@ -137,6 +142,10 @@ void loop()
     if (currentTemperature > overheatThreshold)
     {
       Serial.println("Overheating Detected!");
+      String msg = String::format(
+        "{\"deviceId\":\"%s\",\"status\":\"temp_overheat\",\"currentTemperature\": %f,\"overheatThreshold\": %f}",
+        System.deviceID().c_str(), currentTemperature, overheatThreshold);
+      Particle.publish("overheatDetected", msg);
       currentColor = 1;
     }
     // else
