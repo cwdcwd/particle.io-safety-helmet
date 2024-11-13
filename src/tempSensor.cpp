@@ -128,7 +128,7 @@ void loop()
           "{\"deviceId\":\"%s\",\"status\":\"temp_spike\",\"currentTemperature\": %f,\"movingAverage\": %f, \"spikeThreshold\": %f}",
            System.deviceID().c_str(), currentTemperature, movingAverage, spikeThreshold);
 
-      Particle.publish("spike", msg);
+      Particle.publish("proactive_hardhat_spike", msg);
 
       for(byte b = 0; b<3; ++b) { //CWD-- flash the LED 3 times
         setColor(true, false, true);
@@ -145,7 +145,7 @@ void loop()
       String msg = String::format(
         "{\"deviceId\":\"%s\",\"status\":\"temp_overheat\",\"currentTemperature\": %f,\"overheatThreshold\": %f}",
         System.deviceID().c_str(), currentTemperature, overheatThreshold);
-      Particle.publish("overheatDetected", msg);
+      Particle.publish("proactive_hardhat_overheat", msg);
       currentColor = 1;
     }
     // else
